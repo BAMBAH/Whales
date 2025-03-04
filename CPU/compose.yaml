@@ -1,0 +1,27 @@
+networks:
+    net:
+        driver: 'none'
+
+services:
+  ollama:
+    build: .
+    container_name: ollama-deepseek
+    environment:
+      - MODEL_SIZE=1.5b
+    volumes:
+      - /home/docker/ollama/deepseek:/home/ollama/deepseek
+    ports:
+      - 11434:11434
+
+  webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: webui
+    ports:
+      - 8080:8080
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - PORT=8080
+    volumes:
+      - /home/docker/webui:/home/webui
+    depends_on:
+      - ollama
