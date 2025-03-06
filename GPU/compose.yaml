@@ -7,7 +7,7 @@ services:
     build: .
     container_name: ollama-deepseek
     environment:
-      - MODEL_SIZE=1.5b
+      - MODEL_SIZE=7b
     volumes:
       - /home/docker/ollama/deepseek:/home/ollama/deepseek
     ports:
